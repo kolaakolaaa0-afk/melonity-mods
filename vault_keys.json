@@ -1,0 +1,17 @@
+[
+  {
+    "key": "OWNER-KEY-2026",
+    "role": "owner",
+    "name": "Владелец"
+  },
+  {
+    "key": "ADMIN-KEY-2026",
+    "role": "admin",
+    "name": "Модератор"
+  },
+  {
+    "key": "AUTHOR-KEY-2026",
+    "role": "author",
+    "name": "Автор модов"
+  }
+]
