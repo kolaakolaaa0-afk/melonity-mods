@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GitHub Mods Vault</title>
+  <title>MELONITY // Mods Vault</title>
   <style>
     :root {
       --bg: #0b0d12;
       --panel: #131722;
       --panel-2: #191f2e;
-      --border: rgba(255,255,255,0.09);
+      --border: rgba(255, 255, 255, 0.09);
       --text: #eef1f7;
       --muted: #8f98ad;
       --accent: #ff9f43;
@@ -41,9 +41,9 @@
       padding: 9px 14px; font-weight: 600; font-size: 13px; cursor: pointer;
     }
     button:hover { filter: brightness(1.06); }
-    button.sec { background: rgba(255,255,255,0.08); color: var(--text); }
-    button.ok { background: rgba(46,213,115,0.16); color: var(--ok); border: 1px solid rgba(46,213,115,0.35); }
-    button.bad { background: rgba(255,71,87,0.16); color: var(--bad); border: 1px solid rgba(255,71,87,0.35); }
+    button.sec { background: rgba(255, 255, 255, 0.08); color: var(--text); }
+    button.ok { background: rgba(46, 213, 115, 0.16); color: var(--ok); border: 1px solid rgba(46, 213, 115, 0.35); }
+    button.bad { background: rgba(255, 71, 87, 0.16); color: var(--bad); border: 1px solid rgba(255, 71, 87, 0.35); }
     button.sm { padding: 6px 10px; font-size: 12px; }
     .hidden { display: none !important; }
     header {
@@ -51,74 +51,58 @@
       margin-bottom: 18px;
     }
     .badge { padding: 4px 9px; border-radius: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
-    .b-owner { background: rgba(255,159,67,0.2); color: var(--accent); }
-    .b-admin { background: rgba(168,85,247,0.2); color: #c084fc; }
-    .b-author { background: rgba(46,213,115,0.16); color: var(--ok); }
+    .b-owner { background: rgba(255, 159, 67, 0.2); color: var(--accent); }
+    .b-admin { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
+    .b-author { background: rgba(46, 213, 115, 0.16); color: var(--ok); }
     .tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
     .tab.active { outline: 2px solid var(--accent); }
     .grid-mods { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 14px; }
     .mod-top { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
     .pill { font-size: 11px; padding: 3px 8px; border-radius: 6px; font-weight: 600; }
-    .p-ok { background: rgba(46,213,115,0.15); color: var(--ok); }
-    .p-wait { background: rgba(255,165,2,0.15); color: var(--warn); }
-    .p-no { background: rgba(255,71,87,0.15); color: var(--bad); }
-    .meta { font-size: 12px; color: var(--muted); background: rgba(0,0,0,0.25); padding: 10px; border-radius: 8px; margin: 10px 0; }
+    .p-ok { background: rgba(46, 213, 115, 0.15); color: var(--ok); }
+    .p-wait { background: rgba(255, 165, 2, 0.15); color: var(--warn); }
+    .p-no { background: rgba(255, 71, 87, 0.15); color: var(--bad); }
+    .meta { font-size: 12px; color: var(--muted); background: rgba(0, 0, 0, 0.25); padding: 10px; border-radius: 8px; margin: 10px 0; }
     .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
     table { width: 100%; border-collapse: collapse; margin-top: 12px; }
     th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 13px; }
-    code { background: rgba(255,255,255,0.07); padding: 2px 6px; border-radius: 5px; color: var(--accent); }
+    code { background: rgba(255, 255, 255, 0.07); padding: 2px 6px; border-radius: 5px; color: var(--accent); }
     .modal-bg {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.75); display: none;
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); display: none;
       align-items: center; justify-content: center; padding: 16px; z-index: 50;
     }
     .modal-bg.open { display: flex; }
     .modal { max-width: 760px; width: 100%; max-height: 90vh; overflow-y: auto; }
-    .msg { font-size: 13px; margin-top: 10px; color: var(--warn); }
+    .msg { font-size: 13px; margin-top: 12px; color: var(--warn); }
   </style>
 </head>
 <body>
 
 <div id="loginView" class="card login-box">
-  <h1>GITHUB <span>MODS VAULT</span></h1>
+  <h1>MELONITY <span>MODS VAULT</span></h1>
   <p class="sub">
-    <code>mods.json</code> остаётся открытым на GitHub, а <code>vault_mods.enc</code> и <code>vault_keys.enc</code> хранятся в репозитории в зашифрованном виде.
+    Открытый файл: <code>mods.json</code><br>
+    Зашифрованные базы: <code>vault_mods.json</code> и <code>vault_keys.json</code>
   </p>
 
-  <div class="row">
-    <div class="field">
-      <label>GitHub Owner (логин/орг)</label>
-      <input id="ghOwner" placeholder="kolaakolaaa0-afk" />
-    </div>
-    <div class="field">
-      <label>Репозиторий</label>
-      <input id="ghRepo" placeholder="launcher_meloniry_server" />
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="field">
-      <label>Ветка</label>
-      <input id="ghBranch" value="main" />
-    </div>
-    <div class="field">
-      <label>GitHub Token (для записи на GitHub)</label>
-      <input type="password" id="ghToken" placeholder="github_pat_..." />
-    </div>
+  <div class="field">
+    <label>GitHub Personal Access Token (права Contents: Read & Write)</label>
+    <input type="password" id="ghToken" placeholder="github_pat_..." />
   </div>
 
   <div class="field">
-    <label>Мастер-ключ шифрования (.enc файлов)</label>
-    <input type="password" id="encSecret" placeholder="Придумайте надёжный пароль" />
+    <label>Мастер-ключ шифрования (.json баз)</label>
+    <input type="password" id="encSecret" placeholder="Пароль для шифрования/расшифровки" />
   </div>
 
   <div class="field">
     <label>Ваш ключ доступа (Автор / Админ / Владелец)</label>
-    <input type="password" id="userKey" placeholder="Например: OWNER-INIT или ваш ключ" />
+    <input type="password" id="userKey" placeholder="Например: OWNER-MELONITY-2026" />
   </div>
 
   <div class="actions">
-    <button onclick="connectVault(false)" style="flex:1;">Войти и загрузить</button>
-    <button class="sec" onclick="connectVault(true)" title="Создаст первый ключ владельца и пустые зашифрованные базы, если их ещё нет">Инициализировать vault</button>
+    <button onclick="connectVault(false)" style="flex:1;">Войти</button>
+    <button class="sec" onclick="connectVault(true)">Создать базы (первый запуск)</button>
   </div>
   <div id="loginMsg" class="msg"></div>
 </div>
@@ -127,20 +111,20 @@
   <div class="card">
     <header>
       <div>
-        <strong><span id="repoLabel"></span></strong>
+        <strong>MELONITY MODS</strong>
         <span id="roleBadge" class="badge"></span>
         <span id="userLabel" style="margin-left:8px; font-size:13px; color:var(--muted);"></span>
       </div>
       <div style="display:flex; gap:8px; flex-wrap:wrap;">
-        <a id="rawModsLink" href="#" target="_blank" class="sec" style="text-decoration:none; padding:6px 10px; border-radius:8px; font-size:12px; display:inline-flex; align-items:center;">Открыть mods.json</a>
-        <button class="sec sm" onclick="publishAll()">Сохранить на GitHub</button>
+        <a id="rawModsLink" href="https://raw.githubusercontent.com/kolaakolaaa0-afk/launcher_meloniry_server/main/mods.json" target="_blank" class="sec" style="text-decoration:none; padding:6px 10px; border-radius:8px; font-size:12px; display:inline-flex; align-items:center;">Открыть mods.json</a>
+        <button id="btnSaveGh" onclick="publishAll()">Сохранить на GitHub</button>
         <button class="bad sm" onclick="logout()">Выйти</button>
       </div>
     </header>
 
     <div class="tabs">
       <button id="tabMods" class="tab active" onclick="setTab('mods')">Модификации</button>
-      <button id="tabKeys" class="tab hidden" onclick="setTab('keys')">Ключи</button>
+      <button id="tabKeys" class="tab hidden" onclick="setTab('keys')">Ключи доступа</button>
       <button id="btnAddMod" onclick="openEditor()" style="margin-left:auto;">+ Добавить мод</button>
     </div>
 
@@ -151,8 +135,8 @@
     <div id="viewKeys" class="hidden">
       <div class="row-3">
         <div class="field">
-          <label>Имя / Ник</label>
-          <input id="kName" placeholder="Автор / Модератор" />
+          <label>Имя / Никнейм</label>
+          <input id="kName" placeholder="Cody_Mansory" />
         </div>
         <div class="field">
           <label>Роль</label>
@@ -163,10 +147,10 @@
           </select>
         </div>
         <div class="field">
-          <label>Ключ (если пусто — сгенерируется)</label>
+          <label>Ключ (оставь пустым для автогенерации)</label>
           <div style="display:flex; gap:8px;">
-            <input id="kValue" placeholder="AUTH-XXXX" />
-            <button onclick="addKey()">Выдать</button>
+            <input id="kValue" placeholder="AUTHOR-XXXX" />
+            <button onclick="addKey()">Создать</button>
           </div>
         </div>
       </div>
@@ -206,8 +190,8 @@
       <div class="field"><label>descriptionEn</label><textarea id="m_descriptionEn"></textarea></div>
     </div>
     <div class="row">
-      <div class="field"><label>downloadUrl *</label><input id="m_downloadUrl" /></div>
-      <div class="field"><label>sourceUrl</label><input id="m_sourceUrl" /></div>
+      <div class="field"><label>downloadUrl *</label><input id="m_downloadUrl" placeholder="https://raw.githubusercontent.com/..." /></div>
+      <div class="field"><label>sourceUrl</label><input id="m_sourceUrl" placeholder="https://github.com/..." /></div>
       <div class="field"><label>source</label><input id="m_source" value="launcher_meloniry_server" /></div>
       <div class="field"><label>authors (через запятую)</label><input id="m_authors" /></div>
     </div>
@@ -229,18 +213,39 @@
 </div>
 
 <script>
-const VAULT_MODS_PATH = 'vault_mods.enc';
-const VAULT_KEYS_PATH = 'vault_keys.enc';
-const PUBLIC_MODS_PATH = 'mods.json';
+// === НАСТРОЙКИ РЕПОЗИТОРИЯ И ПРЯМАЯ ССЫЛКА ===
+const MODS_JSON_URL = 'https://raw.githubusercontent.com/kolaakolaaa0-afk/launcher_meloniry_server/main/mods.json';
+const GH_OWNER  = 'kolaakolaaa0-afk';
+const GH_REPO   = 'launcher_meloniry_server';
+const GH_BRANCH = 'main';
 
-let cfg = { owner: '', repo: '', branch: 'main', token: '', secret: '', userKey: '' };
+const VAULT_MODS_FILE  = 'vault_mods.json';
+const VAULT_KEYS_FILE  = 'vault_keys.json';
+const PUBLIC_MODS_FILE = 'mods.json';
+
+let session = { token: '', secret: '', userKey: '' };
 let me = null;
 let keysDb = [];
 let modsDb = [];
-let dirty = false;
 
-// --- Криптография AES-GCM (Web Crypto API) ---
-async function deriveKey(password, salt) {
+document.getElementById('rawModsLink').href = MODS_JSON_URL;
+
+// === ШИФРОВАНИЕ В JSON-КОНТЕЙНЕР (AES-GCM 256) ===
+function bufToB64(buf) {
+  const bytes = new Uint8Array(buf);
+  let bin = '';
+  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+  return btoa(bin);
+}
+
+function b64ToBuf(b64) {
+  const bin = atob(b64);
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return bytes;
+}
+
+async function deriveAesKey(password, salt) {
   const enc = new TextEncoder();
   const baseKey = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
   return crypto.subtle.deriveKey(
@@ -252,133 +257,157 @@ async function deriveKey(password, salt) {
   );
 }
 
-async function encryptObj(obj, password) {
+async function encryptToJsonContainer(dataObj, password) {
   const salt = crypto.getRandomValues(new Uint8Array(16));
   const iv = crypto.getRandomValues(new Uint8Array(12));
-  const key = await deriveKey(password, salt);
-  const plain = new TextEncoder().encode(JSON.stringify(obj));
-  const cipher = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, plain);
-  const out = new Uint8Array(salt.length + iv.length + cipher.byteLength);
-  out.set(salt, 0);
-  out.set(iv, salt.length);
-  out.set(new Uint8Array(cipher), salt.length + iv.length);
-  return btoa(String.fromCharCode(...out));
+  const key = await deriveAesKey(password, salt);
+  const plainBytes = new TextEncoder().encode(JSON.stringify(dataObj));
+  const cipherBuf = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, plainBytes);
+
+  return JSON.stringify({
+    alg: 'AES-GCM',
+    kdf: 'PBKDF2-SHA256',
+    iter: 150000,
+    salt: bufToB64(salt),
+    iv: bufToB64(iv),
+    data: bufToB64(cipherBuf)
+  }, null, 2);
 }
 
-async function decryptObj(b64Str, password) {
-  const rawStr = atob(b64Str.trim());
-  const bytes = new Uint8Array(rawStr.length);
-  for (let i = 0; i < rawStr.length; i++) bytes[i] = rawStr.charCodeAt(i);
-  const salt = bytes.slice(0, 16);
-  const iv = bytes.slice(16, 28);
-  const cipher = bytes.slice(28);
-  const key = await deriveKey(password, salt);
-  const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, cipher);
-  return JSON.parse(new TextDecoder().decode(plain));
+async function decryptFromJsonContainer(jsonStr, password) {
+  const box = JSON.parse(jsonStr);
+  if (!box || !box.salt || !box.iv || !box.data) {
+    throw new Error('Неверный формат зашифрованного JSON');
+  }
+  const salt = b64ToBuf(box.salt);
+  const iv = b64ToBuf(box.iv);
+  const cipher = b64ToBuf(box.data);
+  const key = await deriveAesKey(password, salt);
+  const plainBuf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, cipher);
+  return JSON.parse(new TextDecoder().decode(plainBuf));
 }
 
-// --- Работа с GitHub API ---
-async function ghGetFile(path) {
-  const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}?ref=${encodeURIComponent(cfg.branch)}`;
+// === РАБОТА С GITHUB API ===
+function utf8ToB64(str) {
+  const bytes = new TextEncoder().encode(str);
+  return bufToB64(bytes);
+}
+
+function b64ToUtf8(b64) {
+  const bytes = b64ToBuf(b64.replace(/\s/g, ''));
+  return new TextDecoder().decode(bytes);
+}
+
+async function ghReadFile(path) {
+  const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}&t=${Date.now()}`;
   const headers = { 'Accept': 'application/vnd.github+json' };
-  if (cfg.token) headers['Authorization'] = `Bearer ${cfg.token}`;
+  if (session.token) headers['Authorization'] = `Bearer ${session.token}`;
+
   const res = await fetch(url, { headers });
   if (res.status === 404) return null;
-  if (!res.ok) throw new Error(`GitHub GET ${path}: ${res.status}`);
-  const data = await res.json();
-  const content = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
-  return { content, sha: data.sha };
+  if (!res.ok) throw new Error(`Ошибка чтения ${path}: HTTP ${res.status}`);
+
+  const json = await res.json();
+  return {
+    content: b64ToUtf8(json.content),
+    sha: json.sha
+  };
 }
 
-async function ghPutFile(path, contentStr, message) {
-  if (!cfg.token) throw new Error('Укажите GitHub Token для записи в репозиторий');
-  let sha = undefined;
-  try {
-    const existing = await ghGetFile(path);
-    if (existing) sha = existing.sha;
-  } catch (_) {}
-  const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${path}`;
-  const b64 = btoa(unescape(encodeURIComponent(contentStr)));
-  const body = { message, content: b64, branch: cfg.branch };
-  if (sha) body.sha = sha;
+async function ghWriteFile(path, contentStr, commitMsg) {
+  if (!session.token) throw new Error('Не указан GitHub Token');
+
+  const existing = await ghReadFile(path);
+  const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`;
+  const body = {
+    message: commitMsg,
+    content: utf8ToB64(contentStr),
+    branch: GH_BRANCH
+  };
+  if (existing && existing.sha) body.sha = existing.sha;
+
   const res = await fetch(url, {
     method: 'PUT',
     headers: {
-      'Authorization': `Bearer ${cfg.token}`,
+      'Authorization': `Bearer ${session.token}`,
       'Accept': 'application/vnd.github+json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(body)
   });
+
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
-    throw new Error(`GitHub PUT ${path}: ${res.status} ${err.message || ''}`);
+    throw new Error(`Ошибка записи ${path}: ${err.message || res.status}`);
   }
 }
 
-function buildPublicModsJson() {
-  const verified = modsDb
+function generatePublicModsJson() {
+  const approvedMods = modsDb
     .filter(m => Boolean(m.isVerified))
     .map(m => {
-      const { _ownerKey, _status, _rejectReason, ...clean } = m;
-      return clean;
+      const { _ownerKey, _status, _rejectReason, ...cleanMod } = m;
+      return cleanMod;
     });
-  return JSON.stringify({ mods: verified }, null, 2);
+  return JSON.stringify({ mods: approvedMods }, null, 2);
 }
 
-async function connectVault(initMode) {
+// === АВТОРИЗАЦИЯ И ИНИЦИАЛИЗАЦИЯ ===
+async function connectVault(isInit) {
   const msg = document.getElementById('loginMsg');
-  msg.textContent = 'Загрузка...';
-  cfg = {
-    owner: document.getElementById('ghOwner').value.trim(),
-    repo: document.getElementById('ghRepo').value.trim(),
-    branch: document.getElementById('ghBranch').value.trim() || 'main',
-    token: document.getElementById('ghToken').value.trim(),
-    secret: document.getElementById('encSecret').value,
-    userKey: document.getElementById('userKey').value.trim()
-  };
+  msg.textContent = 'Подключение к GitHub...';
 
-  if (!cfg.owner || !cfg.repo || !cfg.secret || !cfg.userKey) {
-    msg.textContent = 'Заполните owner, repo, мастер-ключ и ваш ключ доступа';
+  session.token   = document.getElementById('ghToken').value.trim();
+  session.secret  = document.getElementById('encSecret').value;
+  session.userKey = document.getElementById('userKey').value.trim();
+
+  if (!session.secret || !session.userKey) {
+    msg.textContent = 'Введите мастер-ключ шифрования и ваш ключ доступа';
     return;
   }
 
   try {
-    let kFile = await ghGetFile(VAULT_KEYS_PATH);
-    let mFile = await ghGetFile(VAULT_MODS_PATH);
+    let keysFile = await ghReadFile(VAULT_KEYS_FILE);
+    let modsFile = await ghReadFile(VAULT_MODS_FILE);
 
-    if (initMode && (!kFile || !mFile)) {
-      const defaultKeys = [{ key: cfg.userKey, role: 'owner', name: 'Владелец' }];
-      let initialMods = [];
-      const pubFile = await ghGetFile(PUBLIC_MODS_PATH);
-      if (pubFile) {
-        const parsed = JSON.parse(pubFile.content);
-        if (Array.isArray(parsed.mods)) {
-          initialMods = parsed.mods.map(m => ({
+    if (isInit) {
+      if (!session.token) throw new Error('Для создания баз нужен GitHub Token');
+      if (keysFile || modsFile) throw new Error('Базы vault_keys.json / vault_mods.json уже существуют в репозитории');
+
+      const initKeys = [{ key: session.userKey, role: 'owner', name: 'Владелец' }];
+      let initMods = [];
+
+      // Импортируем существующие моды из публичного mods.json
+      const pubRes = await fetch(`${MODS_JSON_URL}?t=${Date.now()}`);
+      if (pubRes.ok) {
+        const pubJson = await pubRes.json();
+        if (Array.isArray(pubJson.mods)) {
+          initMods = pubJson.mods.map(m => ({
             ...m,
-            _ownerKey: cfg.userKey,
+            _ownerKey: session.userKey,
             _status: m.isVerified ? 'approved' : 'pending'
           }));
         }
       }
-      await ghPutFile(VAULT_KEYS_PATH, await encryptObj(defaultKeys, cfg.secret), 'Init vault_keys.enc');
-      await ghPutFile(VAULT_MODS_PATH, await encryptObj(initialMods, cfg.secret), 'Init vault_mods.enc');
-      kFile = await ghGetFile(VAULT_KEYS_PATH);
-      mFile = await ghGetFile(VAULT_MODS_PATH);
+
+      await ghWriteFile(VAULT_KEYS_FILE, await encryptToJsonContainer(initKeys, session.secret), 'Init vault_keys.json');
+      await ghWriteFile(VAULT_MODS_FILE, await encryptToJsonContainer(initMods, session.secret), 'Init vault_mods.json');
+
+      keysFile = await ghReadFile(VAULT_KEYS_FILE);
+      modsFile = await ghReadFile(VAULT_MODS_FILE);
     }
 
-    if (!kFile) throw new Error('vault_keys.enc не найден в репозитории');
-    keysDb = await decryptObj(kFile.content, cfg.secret);
-    me = keysDb.find(k => k.key === cfg.userKey);
-    if (!me) throw new Error('Ключ доступа не найден в vault_keys.enc');
+    if (!keysFile) throw new Error('Файл vault_keys.json не найден. Нажмите «Создать базы (первый запуск)».');
 
-    modsDb = mFile ? await decryptObj(mFile.content, cfg.secret) : [];
+    keysDb = await decryptFromJsonContainer(keysFile.content, session.secret);
+    me = keysDb.find(k => k.key === session.userKey);
+    if (!me) throw new Error('Неверный ключ доступа');
+
+    modsDb = modsFile ? await decryptFromJsonContainer(modsFile.content, session.secret) : [];
 
     document.getElementById('loginView').classList.add('hidden');
     document.getElementById('appView').classList.remove('hidden');
-    document.getElementById('repoLabel').textContent = `${cfg.owner}/${cfg.repo} (${cfg.branch})`;
     document.getElementById('userLabel').textContent = me.name;
-    document.getElementById('rawModsLink').href = `https://raw.githubusercontent.com/${cfg.owner}/${cfg.repo}/${encodeURIComponent(cfg.branch)}/${PUBLIC_MODS_PATH}`;
 
     const badge = document.getElementById('roleBadge');
     badge.textContent = me.role;
@@ -394,8 +423,9 @@ async function connectVault(initMode) {
     }
 
     renderMods();
-  } catch (e) {
-    msg.textContent = e.message || 'Ошибка входа или расшифровки';
+    msg.textContent = '';
+  } catch (err) {
+    msg.textContent = err.message || 'Ошибка расшифровки (проверь мастер-пароль)';
   }
 }
 
@@ -410,32 +440,37 @@ function setTab(tab) {
   document.getElementById('tabKeys').classList.toggle('active', tab === 'keys');
 }
 
+// === РЕНДЕР И УПРАВЛЕНИЕ МОДАМИ ===
 function renderMods() {
-  const list = document.getElementById('modsList');
-  const visible = me.role === 'author' ? modsDb.filter(m => m._ownerKey === me.key) : modsDb;
+  const container = document.getElementById('modsList');
+  const list = me.role === 'author'
+    ? modsDb.filter(m => m._ownerKey === me.key)
+    : modsDb;
 
-  if (!visible.length) {
-    list.innerHTML = '<p style="color:var(--muted);">Модификаций пока нет.</p>';
+  if (!list.length) {
+    container.innerHTML = '<p style="color:var(--muted);">Модификаций пока нет.</p>';
     return;
   }
 
-  list.innerHTML = visible.map(m => {
-    const pill = m.isVerified
+  container.innerHTML = list.map(m => {
+    const statusPill = m.isVerified
       ? '<span class="pill p-ok">Верифицирован</span>'
       : (m._status === 'rejected'
         ? `<span class="pill p-no">Отклонён: ${m._rejectReason || ''}</span>`
         : '<span class="pill p-wait">На проверке</span>');
 
-    let btns = '';
+    let actions = '';
     if (me.role === 'owner' || (me.role === 'author' && m._ownerKey === me.key)) {
-      btns += `<button class="sec sm" onclick="openEditor('${m.id}')">Изменить</button>`;
+      actions += `<button class="sec sm" onclick="openEditor('${m.id}')">Изменить</button>`;
     }
     if (me.role === 'admin' || me.role === 'owner') {
-      if (!m.isVerified) btns += `<button class="ok sm" onclick="moderate('${m.id}','approve')">Одобрить</button>`;
-      btns += `<button class="sec sm" onclick="moderate('${m.id}','reject')">Отклонить</button>`;
+      if (!m.isVerified) {
+        actions += `<button class="ok sm" onclick="moderate('${m.id}', 'approve')">Одобрить</button>`;
+      }
+      actions += `<button class="sec sm" onclick="moderate('${m.id}', 'reject')">Отклонить</button>`;
     }
     if (me.role === 'owner') {
-      btns += `<button class="bad sm" onclick="removeMod('${m.id}')">Удалить</button>`;
+      actions += `<button class="bad sm" onclick="deleteMod('${m.id}')">Удалить</button>`;
     }
 
     return `
@@ -445,7 +480,7 @@ function renderMods() {
             <strong>${m.nameRu || m.name}</strong>
             <div style="font-size:11px; color:var(--muted);"><code>${m.id}</code> • ${m.category || 'other'}</div>
           </div>
-          ${pill}
+          ${statusPill}
         </div>
         <div style="font-size:13px; color:#cbd2e0;">${m.descriptionRu || m.description || ''}</div>
         <div class="meta">
@@ -453,7 +488,7 @@ function renderMods() {
           <div><b>Размер:</b> ${m.sizeBytes || 0} B</div>
           <div style="word-break:break-all;"><b>URL:</b> ${m.downloadUrl || ''}</div>
         </div>
-        <div class="actions">${btns}</div>
+        <div class="actions">${actions}</div>
       </div>
     `;
   }).join('');
@@ -462,14 +497,14 @@ function renderMods() {
 function openEditor(id = null) {
   const isEdit = Boolean(id);
   document.getElementById('edIsEdit').value = isEdit ? '1' : '0';
-  document.getElementById('edTitle').textContent = isEdit ? `Изменить: ${id}` : 'Добавить модификацию';
-  const idEl = document.getElementById('m_id');
-  idEl.disabled = isEdit;
+  document.getElementById('edTitle').textContent = isEdit ? `Редактировать: ${id}` : 'Добавить модификацию';
+  const idInput = document.getElementById('m_id');
+  idInput.disabled = isEdit;
 
   if (isEdit) {
     const m = modsDb.find(x => x.id === id);
     if (!m) return;
-    idEl.value = m.id;
+    idInput.value = m.id;
     document.getElementById('m_category').value = m.category || 'other';
     document.getElementById('m_sizeBytes').value = m.sizeBytes || 0;
     document.getElementById('m_name').value = m.name || '';
@@ -498,8 +533,9 @@ function openEditor(id = null) {
     document.getElementById('m_authors').value = me.name;
     document.getElementById('m_isProjectMod').checked = true;
     document.getElementById('m_isNew').checked = true;
-    document.getElementById('m_isVerified').checked = me.role === 'owner';
+    document.getElementById('m_isVerified').checked = (me.role === 'owner');
   }
+
   document.getElementById('editorModal').classList.add('open');
 }
 
@@ -507,7 +543,7 @@ function closeEditor() {
   document.getElementById('editorModal').classList.remove('open');
 }
 
-function csv(val) {
+function parseCsv(val) {
   return val.split(',').map(s => s.trim()).filter(Boolean);
 }
 
@@ -515,21 +551,21 @@ function saveModLocal() {
   const isEdit = document.getElementById('edIsEdit').value === '1';
   const id = document.getElementById('m_id').value.trim();
   const name = document.getElementById('m_name').value.trim();
-  if (!id || !name) return alert('Укажите id и name');
+  if (!id || !name) return alert('Заполни обязательные поля id и name');
 
   const idx = modsDb.findIndex(x => x.id === id);
-  if (!isEdit && idx !== -1) return alert('Мод с таким id уже есть');
+  if (!isEdit && idx !== -1) return alert('Модификация с таким id уже существует');
 
   const prev = isEdit ? modsDb[idx] : null;
   if (isEdit && me.role === 'author' && prev._ownerKey !== me.key) {
-    return alert('Можно менять только свои моды');
+    return alert('Вы можете изменять только свои модификации');
   }
 
-  const verified = me.role === 'owner'
+  const verified = (me.role === 'owner')
     ? document.getElementById('m_isVerified').checked
     : false;
 
-  const obj = {
+  const modObj = {
     id,
     name,
     nameRu: document.getElementById('m_nameRu').value.trim() || name,
@@ -543,30 +579,30 @@ function saveModLocal() {
     isNew: document.getElementById('m_isNew').checked,
     isVerified: verified,
     category: document.getElementById('m_category').value.trim() || 'other',
-    dependencies: csv(document.getElementById('m_dependencies').value),
-    authors: csv(document.getElementById('m_authors').value),
-    authorLinks: csv(document.getElementById('m_authorLinks').value),
+    dependencies: parseCsv(document.getElementById('m_dependencies').value),
+    authors: parseCsv(document.getElementById('m_authors').value),
+    authorLinks: parseCsv(document.getElementById('m_authorLinks').value),
     source: document.getElementById('m_source').value.trim() || 'launcher_meloniry_server',
     sourceUrl: document.getElementById('m_sourceUrl').value.trim(),
     sizeBytes: parseInt(document.getElementById('m_sizeBytes').value, 10) || 0,
     downloadUrl: document.getElementById('m_downloadUrl').value.trim(),
-    imageUrls: csv(document.getElementById('m_imageUrls').value),
+    imageUrls: parseCsv(document.getElementById('m_imageUrls').value),
     _ownerKey: isEdit ? prev._ownerKey : me.key,
     _status: verified ? 'approved' : 'pending'
   };
 
-  if (isEdit) modsDb[idx] = obj;
-  else modsDb.push(obj);
+  if (isEdit) modsDb[idx] = modObj;
+  else modsDb.push(modObj);
 
-  dirty = true;
   closeEditor();
   renderMods();
-  document.getElementById('appMsg').textContent = 'Изменения применены локально — нажмите «Сохранить на GitHub» для публикации.';
+  document.getElementById('appMsg').textContent = 'Есть несохранённые изменения — нажми «Сохранить на GitHub».';
 }
 
 function moderate(id, decision) {
   const m = modsDb.find(x => x.id === id);
   if (!m) return;
+
   if (decision === 'approve') {
     m.isVerified = true;
     m._status = 'approved';
@@ -576,64 +612,73 @@ function moderate(id, decision) {
     m._status = 'rejected';
     m._rejectReason = prompt('Причина отклонения:') || 'Не прошло проверку';
   }
-  dirty = true;
+
   renderMods();
-  document.getElementById('appMsg').textContent = 'Статус изменён локально — нажмите «Сохранить на GitHub».';
+  document.getElementById('appMsg').textContent = 'Статус обновлён — нажми «Сохранить на GitHub».';
 }
 
-function removeMod(id) {
+function deleteMod(id) {
   if (me.role !== 'owner') return;
-  if (!confirm(`Удалить ${id}?`)) return;
+  if (!confirm(`Удалить модификацию "${id}"?`)) return;
+
   modsDb = modsDb.filter(x => x.id !== id);
-  dirty = true;
   renderMods();
-  document.getElementById('appMsg').textContent = 'Удалено локально — нажмите «Сохранить на GitHub».';
+  document.getElementById('appMsg').textContent = 'Удалено — нажми «Сохранить на GitHub».';
 }
 
+// === УПРАВЛЕНИЕ КЛЮЧАМИ (ТОЛЬКО ВЛАДЕЛЕЦ) ===
 function renderKeys() {
-  const tb = document.getElementById('keysTbody');
-  tb.innerHTML = keysDb.map(k => `
+  document.getElementById('keysTbody').innerHTML = keysDb.map(k => `
     <tr>
       <td>${k.name}</td>
       <td><code>${k.key}</code></td>
       <td><span class="badge b-${k.role}">${k.role}</span></td>
-      <td>${k.key !== me.key ? `<button class="bad sm" onclick="delKey('${k.key}')">Удалить</button>` : ''}</td>
+      <td>${k.key !== me.key ? `<button class="bad sm" onclick="deleteKey('${k.key}')">Удалить</button>` : 'Текущий'}</td>
     </tr>
   `).join('');
 }
 
 function addKey() {
   if (me.role !== 'owner') return;
-  const name = document.getElementById('kName').value.trim() || 'Ключ';
+  const name = document.getElementById('kName').value.trim() || 'Пользователь';
   const role = document.getElementById('kRole').value;
-  const val = document.getElementById('kValue').value.trim() || `${role.toUpperCase()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
-  if (keysDb.some(x => x.key === val)) return alert('Такой ключ уже существует');
-  keysDb.push({ key: val, role, name });
-  dirty = true;
+  const custom = document.getElementById('kValue').value.trim();
+  const keyVal = custom || `${role.toUpperCase()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+
+  if (keysDb.some(x => x.key === keyVal)) return alert('Такой ключ уже существует');
+  keysDb.push({ key: keyVal, role, name });
   document.getElementById('kValue').value = '';
   renderKeys();
+  document.getElementById('appMsg').textContent = 'Ключ добавлен — нажми «Сохранить на GitHub».';
 }
 
-function delKey(val) {
-  if (me.role !== 'owner' || val === me.key) return;
-  keysDb = keysDb.filter(x => x.key !== val);
-  dirty = true;
+function deleteKey(keyVal) {
+  if (me.role !== 'owner' || keyVal === me.key) return;
+  keysDb = keysDb.filter(x => x.key !== keyVal);
   renderKeys();
+  document.getElementById('appMsg').textContent = 'Ключ удалён — нажми «Сохранить на GitHub».';
 }
 
+// === СОХРАНЕНИЕ ВСЕХ .JSON ФАЙЛОВ НА GITHUB ===
 async function publishAll() {
   const msg = document.getElementById('appMsg');
-  msg.textContent = 'Шифрование и отправка на GitHub...';
+  const btn = document.getElementById('btnSaveGh');
+  btn.disabled = true;
+  msg.textContent = 'Шифрование и загрузка на GitHub...';
+
   try {
-    await ghPutFile(VAULT_MODS_PATH, await encryptObj(modsDb, cfg.secret), 'Update vault_mods.enc');
-    await ghPutFile(PUBLIC_MODS_PATH, buildPublicModsJson(), 'Sync public mods.json');
+    await ghWriteFile(VAULT_MODS_FILE, await encryptToJsonContainer(modsDb, session.secret), 'Update vault_mods.json');
+    await ghWriteFile(PUBLIC_MODS_FILE, generatePublicModsJson(), 'Sync mods.json');
+
     if (me.role === 'owner') {
-      await ghPutFile(VAULT_KEYS_PATH, await encryptObj(keysDb, cfg.secret), 'Update vault_keys.enc');
+      await ghWriteFile(VAULT_KEYS_FILE, await encryptToJsonContainer(keysDb, session.secret), 'Update vault_keys.json');
     }
-    dirty = false;
-    msg.textContent = 'Успешно сохранено в репозиторий GitHub (mods.json и зашифрованные базы обновлены).';
-  } catch (e) {
-    msg.textContent = e.message;
+
+    msg.textContent = 'Готово! mods.json и зашифрованные .json файлы обновлены в репозитории.';
+  } catch (err) {
+    msg.textContent = err.message;
+  } finally {
+    btn.disabled = false;
   }
 }
 </script>
