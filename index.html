@@ -86,8 +86,8 @@
   </p>
 
   <div class="field">
-    <label>GitHub Personal Access Token (права Contents: Read & Write)</label>
-    <input type="password" id="ghToken" placeholder="github_pat_..." />
+    <label>GitHub Token (нужен для записи на GitHub; если битый — чтение пойдёт без токена)</label>
+    <input type="password" id="ghToken" placeholder="github_pat_... или ghp_..." />
   </div>
 
   <div class="field">
@@ -223,7 +223,7 @@ const VAULT_MODS_FILE  = 'vault_mods.json';
 const VAULT_KEYS_FILE  = 'vault_keys.json';
 const PUBLIC_MODS_FILE = 'mods.json';
 
-let session = { token: '', secret: '', userKey: '' };
+let session = { token: '', secret: '', userKey: '', tokenValidForWrite: false };
 let me = null;
 let keysDb = [];
 let modsDb = [];
@@ -289,23 +289,44 @@ async function decryptFromJsonContainer(jsonStr, password) {
 
 // === РАБОТА С GITHUB API ===
 function utf8ToB64(str) {
-  const bytes = new TextEncoder().encode(str);
-  return bufToB64(bytes);
+  return bufToB64(new TextEncoder().encode(str));
 }
 
 function b64ToUtf8(b64) {
-  const bytes = b64ToBuf(b64.replace(/\s/g, ''));
-  return new TextDecoder().decode(bytes);
+  return new TextDecoder().decode(b64ToBuf(b64.replace(/\s/g, '')));
 }
 
 async function ghReadFile(path) {
-  const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}&t=${Date.now()}`;
-  const headers = { 'Accept': 'application/vnd.github+json' };
-  if (session.token) headers['Authorization'] = `Bearer ${session.token}`;
+  const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?ref=${encodeURIComponent(GH_BRANCH)}&t=${Date.now()}`;
+  const cleanToken = (session.token || '').trim();
 
-  const res = await fetch(url, { headers });
+  const request = async (useToken) => {
+    const headers = { 'Accept': 'application/vnd.github+json' };
+    if (useToken && cleanToken) {
+      headers['Authorization'] = `Bearer ${cleanToken}`;
+    }
+    return fetch(url, { headers });
+  };
+
+  let res = await request(Boolean(cleanToken));
+
+  // Если токен просрочен/неверный (401), пробуем прочитать публичный репо без токена
+  if (res.status === 401 && cleanToken) {
+    session.tokenValidForWrite = false;
+    const anonRes = await request(false);
+    if (anonRes.ok) {
+      res = anonRes;
+    } else if (anonRes.status === 404) {
+      return null;
+    } else {
+      throw new Error('GitHub 401: Токен недействителен или просрочен. Создай новый токен на GitHub.');
+    }
+  } else if (res.ok && cleanToken) {
+    session.tokenValidForWrite = true;
+  }
+
   if (res.status === 404) return null;
-  if (!res.ok) throw new Error(`Ошибка чтения ${path}: HTTP ${res.status}`);
+  if (!res.ok) throw new Error(`GitHub GET ${path}: HTTP ${res.status}`);
 
   const json = await res.json();
   return {
@@ -315,7 +336,10 @@ async function ghReadFile(path) {
 }
 
 async function ghWriteFile(path, contentStr, commitMsg) {
-  if (!session.token) throw new Error('Не указан GitHub Token');
+  const cleanToken = (session.token || '').trim();
+  if (!cleanToken) {
+    throw new Error('Укажи рабочий GitHub Token с правами Contents: Read and write для сохранения на GitHub');
+  }
 
   const existing = await ghReadFile(path);
   const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`;
@@ -329,13 +353,16 @@ async function ghWriteFile(path, contentStr, commitMsg) {
   const res = await fetch(url, {
     method: 'PUT',
     headers: {
-      'Authorization': `Bearer ${session.token}`,
+      'Authorization': `Bearer ${cleanToken}`,
       'Accept': 'application/vnd.github+json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(body)
   });
 
+  if (res.status === 401) {
+    throw new Error('GitHub 401 при сохранении: токен невалиден или отозван. Обнови токен в GitHub Settings.');
+  }
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
     throw new Error(`Ошибка записи ${path}: ${err.message || res.status}`);
@@ -360,6 +387,7 @@ async function connectVault(isInit) {
   session.token   = document.getElementById('ghToken').value.trim();
   session.secret  = document.getElementById('encSecret').value;
   session.userKey = document.getElementById('userKey').value.trim();
+  session.tokenValidForWrite = false;
 
   if (!session.secret || !session.userKey) {
     msg.textContent = 'Введите мастер-ключ шифрования и ваш ключ доступа';
@@ -371,13 +399,12 @@ async function connectVault(isInit) {
     let modsFile = await ghReadFile(VAULT_MODS_FILE);
 
     if (isInit) {
-      if (!session.token) throw new Error('Для создания баз нужен GitHub Token');
+      if (!session.token) throw new Error('Для создания баз нужен рабочий GitHub Token');
       if (keysFile || modsFile) throw new Error('Базы vault_keys.json / vault_mods.json уже существуют в репозитории');
 
       const initKeys = [{ key: session.userKey, role: 'owner', name: 'Владелец' }];
       let initMods = [];
 
-      // Импортируем существующие моды из публичного mods.json
       const pubRes = await fetch(`${MODS_JSON_URL}?t=${Date.now()}`);
       if (pubRes.ok) {
         const pubJson = await pubRes.json();
@@ -423,9 +450,13 @@ async function connectVault(isInit) {
     }
 
     renderMods();
-    msg.textContent = '';
+    if (session.token && !session.tokenValidForWrite) {
+      document.getElementById('appMsg').textContent = 'Внимание: GitHub Token вернул 401. Изменения будут работать локально, но сохранить на GitHub получится только после замены токена.';
+    } else {
+      msg.textContent = '';
+    }
   } catch (err) {
-    msg.textContent = err.message || 'Ошибка расшифровки (проверь мастер-пароль)';
+    msg.textContent = err.message || 'Ошибка входа или расшифровки';
   }
 }
 
